@@ -23,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
 				allowNull: false,
 				validate: {
 					len: [3, 256],
-					isEmail(value) {
-						if (!Validator.isEmail(value)) {
-							throw new Error('Must be a valid email address.')
-						}
-					},
+					// isEmail(value) {
+					// 	if (!Validator.isEmail(value)) {
+					// 		throw new Error('Must be a valid email address.')
+					// 	}
+					// },
 				},
 			},
 			hashedPassword: {
