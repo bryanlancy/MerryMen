@@ -22,5 +22,6 @@
   "bugs": {
     "url": "https://github.com/bryanlancy/MerryMen/issues"
   },
-  "homepage": "https://github.com/bryanlancy/MerryMen#readme"
+  "homepage": "https://github.com/bryanlancy/MerryMen#readme",
+  "dependencies": {}
 }

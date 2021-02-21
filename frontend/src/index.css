@@ -1,1 +1,26 @@
 /* TODO Add site wide styles */
+* {
+	--color-primary: #4f4f4f;
+	--color-shadow: #00000055;
+	--color-highlight: #ffffff33;
+	--color-text: #fffc9a;
+	--color-text-hover: #f9f7c8;
+	--color-glow: #c4d62499;
+	--color-glow-hover: #c4d624;
+
+	--color-price-green: #00ff00;
+	--color-price-green-glow: #00ff00;
+	--color-price-green-hover: #83ff83;
+	--color-price-green-glow-hover: #5eff5e;
+	--color-price-red: #ff0000;
+	--color-price-red-glow: #ff0000;
+	--color-price-red-hover: #ff8e8e;
+	--color-price-red-glow-hover: #ff6969;
+
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+body {
+	background-color: var(--color-primary);
+}

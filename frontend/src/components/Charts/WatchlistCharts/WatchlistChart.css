@@ -1,0 +1,158 @@
+@keyframes pushIn {
+	0% {
+		box-shadow: 0;
+	}
+	100% {
+		box-shadow: 2px 2px 6px var(--color-shadow) inset, -2px -2px 6px var(--color-highlight) inset;
+	}
+}
+@keyframes pushOut {
+	0% {
+		box-shadow: 0;
+	}
+	25% {
+		box-shadow: 0;
+	}
+	100% {
+		box-shadow: 1.5px 1.5px 5px var(--color-shadow), -2px -2px 6px var(--color-highlight);
+	}
+}
+@keyframes fadeIn {
+	0% {
+		opacity: 0;
+	}
+	50% {
+		opacity: 40%;
+	}
+	100% {
+		opacity: 100%;
+	}
+}
+@keyframes dsclideIn {
+	0% {
+		transform: translateX(-100%);
+	}
+
+	100% {
+		transform: translateX(0);
+	}
+}
+@keyframes hideWatchlist {
+	0% {
+		transform: translateX(0);
+	}
+	100% {
+		transform: translateX(-100%);
+	}
+}
+
+.hide-watchlist {
+}
+
+.watchlist {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	max-width: 500px;
+	padding: 16px;
+	border-radius: 0 10px 10px 0;
+	animation: 2s ease-out 0s 1 pushIn forwards, 1s ease-out 0s 1 dsclideIn forwards;
+}
+
+.watchlist__select {
+	width: 90%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.watchlist__header {
+	width: 85%;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+
+	animation: 2s ease-out 0s 1 fadeIn forwards;
+}
+.watchlist__price {
+	display: flex;
+	align-items: center;
+}
+.watchlist__change {
+	display: flex;
+	margin-left: 8px;
+}
+.watchlist__change :not(:first-child) {
+	margin-left: 8px;
+}
+.watchlist__select--title,
+.watchlist__symbol {
+	color: var(--color-text);
+	text-shadow: 0 0 10px var(--color-glow);
+}
+.green {
+	color: var(--color-price-green);
+	text-shadow: 0 0 10px var(--color-price-green-glow);
+}
+.watchlist__chart:hover .green {
+	color: var(--color-price-green-hover);
+	text-shadow: 0 0 10px var(--color-price-green-glow-hover);
+}
+.red {
+	color: var(--color-price-red);
+	text-shadow: 0 0 10px var(--color-price-red-glow);
+}
+
+.watchlist__buttons {
+	width: 30%;
+	display: flex;
+	align-items: center;
+	height: 25px;
+}
+.watchlist__buttons button {
+	border: none;
+	width: 50%;
+	height: 100%;
+}
+.watchlist__buttons button:hover {
+	cursor: pointer;
+}
+.watchlist__buttons--buy {
+	margin-right: 5%;
+	background-color: var(--color-price-green);
+	box-shadow: 0 0 7px 1.5px #00ff00aa;
+}
+.watchlist__buttons--buy:hover {
+	box-shadow: 0 0 7px 1.5px #51ff51ee;
+}
+.watchlist__buttons--sell {
+	margin-left: 5%;
+	background-color: var(--color-price-red);
+	box-shadow: 0 0 7px 1.5px #ff0000aa;
+}
+.watchlist__buttons--sell:hover {
+	box-shadow: 0 0 7px 1.5px #ff5151ee;
+}
+.watchlist__chart:hover .red {
+	color: var(--color-price-red-hover);
+	text-shadow: 0 0 10px var(--color-price-red-glow-hover);
+}
+.watchlist__chart {
+	width: 100%;
+	margin-top: 16px;
+	padding: 8px;
+	border-radius: 10px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	animation: 2s ease-out 0s 1 pushOut forwards;
+	transition: box-shadow 2s;
+}
+.watchlist__chart:hover {
+	cursor: pointer;
+	box-shadow: 2px 2px 6px var(--color-shadow) inset, -2px -2px 6px var(--color-highlight) inset !important;
+}
+.watchlist__chart:hover .watchlist__symbol {
+	color: var(--color-text-hover);
+	text-shadow: 0 0 10px var(--color-glow-hover);
+}
