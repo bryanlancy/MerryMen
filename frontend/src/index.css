@@ -1,3 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=DotGothic16&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Kaushan+Script&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Audiowide&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Sarpanch:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Codystar:wght@300;400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Megrim&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Shrikhand&display=swap');
+
 /* TODO Add site wide styles */
 * {
 	--color-primary: #4f4f4f;
@@ -17,10 +28,43 @@
 	--color-price-red-hover: #ff8e8e;
 	--color-price-red-glow-hover: #ff6969;
 
+	--navbar-height: 50px;
+
 	margin: 0;
 	padding: 0;
 	box-sizing: border-box;
+	/* font-family: 'DotGothic16', sans-serif; */
+	/* font-family: 'Kaushan Script', cursive; */
+	/* font-family: 'Orbitron', sans-serif; */
+	/* font-family: 'Audiowide', cursive; */
+	/* font-family: 'Press Start 2P', cursive; */
+	/* font-family: 'Sarpanch', sans-serif; */
+	/* font-family: 'Codystar', cursive; */
+	/* font-family: 'Megrim', cursive; */
+
+	font-family: 'Shrikhand', cursive;
+
+	font-size: 14px;
 }
-body {
+html,
+body,
+#root {
+	height: 100%;
 	background-color: var(--color-primary);
+	overflow: hidden;
+}
+.page__layout {
+	padding-top: var(--navbar-height);
+	height: 100%;
+	display: flex;
+}
+.page__login {
+	height: 100%;
+	display: flex;
+}
+.page__content {
+	display: flex;
+	width: 100%;
+	padding: 8px;
+	/* background-color: #f0ff0f33; */
 }

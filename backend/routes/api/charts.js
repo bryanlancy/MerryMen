@@ -38,7 +38,7 @@ router.get(
 	asyncHandler(async (req, res) => {
 		console.log('SHOULDNT HIT ME')
 		const symbol = req.params.symbol
-		const url = `https://data.alpaca.markets/v1/bars/day?symbols=${symbol}&limit=10`
+		const url = `https://data.alpaca.markets/v1/bars/day?symbols=${symbol}&limit=100`
 		const config = {
 			headers: {
 				'APCA-API-KEY-ID': process.env.APCA_API_KEY_ID,

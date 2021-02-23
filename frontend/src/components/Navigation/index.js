@@ -1,12 +1,24 @@
-import React from 'react'
-import { NavLink } from 'react-router-dom'
+import React, { useEffect, useState } from 'react'
+import { NavLink, useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import ProfileButton from './ProfileButton'
 import LoginFormModal from '../LoginFormModal'
 import './Navigation.css'
 
 function Navigation({ isLoaded }) {
+	const history = useHistory()
 	const sessionUser = useSelector(state => state.session.user)
+	const [search, setSearch] = useState('')
+
+	useEffect(() => {}, [search])
+
+	function updateSearch(e) {
+		setSearch(e.target.value)
+	}
+
+	function handleKey(e) {
+		if (e.code === 'Enter' || e.code === 'NumpadEnter') history.push(`/stocks/${search}`)
+	}
 
 	let sessionLinks
 	if (sessionUser) {
@@ -21,14 +33,19 @@ function Navigation({ isLoaded }) {
 	}
 
 	return (
-		<ul>
-			<li>
-				<NavLink exact to="/">
-					Home
-				</NavLink>
-				{isLoaded && sessionLinks}
-			</li>
-		</ul>
+		<div className="navbar">
+			<NavLink className="navbar__link--home" exact to="/">
+				<i className="fad fa-bullseye-arrow navbar__icon--main"></i>
+				MerryMen
+			</NavLink>
+
+			<div className="navbar__search">
+				<input type="text" placeholder="Stock Search" value={search} onChange={updateSearch} onKeyPress={handleKey} />
+				<i class="far fa-search-dollar"></i>
+			</div>
+
+			<div className="navbar__session">{isLoaded && sessionLinks}</div>
+		</div>
 	)
 }
 

@@ -37,33 +37,146 @@
 		transform: translateX(0);
 	}
 }
+@keyframes minidsclideIn {
+	0% {
+		transform: translateX(-100%);
+	}
+
+	100% {
+		transform: translateX(0);
+	}
+}
 @keyframes hideWatchlist {
 	0% {
 		transform: translateX(0);
 	}
 	100% {
 		transform: translateX(-100%);
+		opacity: 0;
+	}
+}
+@keyframes lightsOn {
+	0% {
+	}
+	100% {
+		box-shadow: 0 0 10px 1px, 0 0 5px 1px inset;
+		border-radius: 10px 10px 0 0;
+		border-left: 3px solid var(--color-glow);
+		border-top: 3px solid var(--color-glow);
+		border-right: 3px solid var(--color-glow);
+	}
+}
+@keyframes pushButton {
+	0% {
 	}
 }
 
-.hide-watchlist {
+.hidden {
+	animation: 2s ease-out 0s 1 hideWatchlist forwards !important;
+}
+
+.watchlist__select--buttons {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-left: 16px;
+}
+.watchlist__edit,
+.watchlist__hide {
+	color: var(--color-text);
+	background: none;
+	border: none;
+}
+
+.watchlist__edit:hover,
+.watchlist__hide:hover {
+	cursor: pointer;
 }
 
 .watchlist {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	min-width: 500px;
 	max-width: 500px;
 	padding: 16px;
+	height: 100%;
 	border-radius: 0 10px 10px 0;
 	animation: 2s ease-out 0s 1 pushIn forwards, 1s ease-out 0s 1 dsclideIn forwards;
 }
+.watchlist__chart-container {
+	width: 100%;
+	height: 100%;
+	padding: 5px;
+	padding-right: 16px;
+	overflow-y: scroll;
+}
+.watchlist__chart-container::-webkit-scrollbar {
+	padding: 5px;
+	background: var(--color-highlight);
+	box-shadow: 0 0 10px 1px #c4d62444;
+	border-radius: 5px;
+}
+.watchlist__chart-container::-webkit-scrollbar-thumb {
+	background: var(--color-text);
+	border-radius: 5px;
+}
+.watchlist__chart-container::-webkit-scrollbar-thumb:hover {
+	background: var(--color-glow);
+	border-radius: 5px;
+}
+.watchlist__chart-container::-webkit-scrollbar-thumb:active {
+	background: var(--color-text);
+	border-radius: 5px;
+	box-shadow: 0 0 10px 1px #c4d62444;
+}
+.watchlist-mini {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	max-width: 50px;
+	min-height: 250px;
+	color: var(--color-text);
+	animation: 2s ease-out 0s 1 pushIn forwards, 1s ease-out 0s 1 minidsclideIn forwards;
+}
+.watchlist__unhide {
+	display: flex;
+	flex-direction: column;
+	z-index: 1;
+	transform: translateY(-50%);
+}
+.watchlist__unhide i {
+	font-size: 24px;
+}
+.watchlist__unhide h2 {
+	margin-top: 16px;
+	transform: rotate(90deg);
+}
 
 .watchlist__select {
-	width: 90%;
+	width: 95%;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+}
+.watchlist__select--title {
+	width: 50%;
+	padding: 8px;
+	height: 50px;
+	background: none;
+	border: none;
+
+	font-size: 16px;
+	font-weight: bold;
+}
+.watchlist__select--title:focus {
+	animation: 0.2s ease-out 0s 1 lightsOn forwards;
+}
+.watchlist__select--title option {
+	color: red;
+	/* background: none;
+	appearance: none; */
 }
 
 .watchlist__header {
@@ -88,7 +201,6 @@
 .watchlist__select--title,
 .watchlist__symbol {
 	color: var(--color-text);
-	text-shadow: 0 0 10px var(--color-glow);
 }
 .green {
 	color: var(--color-price-green);
@@ -113,6 +225,7 @@
 	border: none;
 	width: 50%;
 	height: 100%;
+	border-radius: 5px;
 }
 .watchlist__buttons button:hover {
 	cursor: pointer;

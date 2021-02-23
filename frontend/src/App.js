@@ -5,6 +5,7 @@ import SignupFormPage from './components/SignupFormPage'
 import * as sessionActions from './store/session'
 import Navigation from './components/Navigation'
 import LineChart from './components/Charts/LineChart'
+import LoginFormPage from './components/LoginFormPage'
 import WatchlistChart from './components/Charts/WatchlistCharts/WatchlistChart'
 
 function App() {
@@ -13,17 +14,20 @@ function App() {
 	const sessionUser = useSelector(state => state.session.user)
 
 	//!REPLACE WITH DB WATCHLIST, FIRST IN LIST
-	const [watchlist, setWatchlist] = useState(['GME', 'AAPL', 'SPY'])
+	const [watchlist, setWatchlist] = useState(['GME', 'AAPL', 'EGAN', 'EEX', 'DIET'])
 
 	useEffect(() => {
 		dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
 	}, [dispatch])
 	if (!sessionUser) {
+		// Not signed in
 		return (
 			<>
-				<Navigation isLoaded={isLoaded} />
 				{isLoaded && (
 					<Switch>
+						<Route exact path="/">
+							<LoginFormPage />
+						</Route>
 						<Route path="/signup">
 							<SignupFormPage />
 						</Route>
@@ -33,19 +37,26 @@ function App() {
 			</>
 		)
 	} else {
+		//Signed In
 		return (
 			<>
 				<Navigation isLoaded={isLoaded} />
-				<Switch>
-					<Route exact path="/">
-						{/* <LineChart symbol="GME" />
+				<div className="page__layout">
+					<WatchlistChart list={watchlist} />
+
+					<div className="page__content">
+						<Switch>
+							<Route exact path="/">
+								{/* <LineChart symbol="GME" />
 						<LineChart symbol="AAPL" /> */}
-						<WatchlistChart list={watchlist} />
-					</Route>
-					<Route path="/stocks/:symbol">
-						<LineChart />
-					</Route>
-				</Switch>
+							</Route>
+							<Route path="/stocks/:symbol">
+								{/* <StockInfoPage /> */}
+								<LineChart />
+							</Route>
+						</Switch>
+					</div>
+				</div>
 			</>
 		)
 	}

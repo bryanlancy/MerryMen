@@ -1,3 +1,22 @@
-form {
-	color: red;
+.login-form__container,
+.login-form__picture {
+	height: 100%;
+	width: 50%;
+}
+
+.login-form__picture {
+	background: #000;
+}
+.login-form__container {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+.login-form__container form {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: flex-end;
+	background-color: #fff;
+	height: 30%;
 }

@@ -10,20 +10,30 @@ const LineChart = ({ symbol }) => {
 	const params = useParams()
 	symbol = symbol ? symbol : params.symbol
 	const { [symbol]: stockData } = useSelector(state => state.stockData.stocks)
-	const dispatch = useDispatch()
+
 	const [state, setState] = useState({})
-	console.log(params)
-	useEffect(() => {
-		dispatch(getLineDataBySymbol(symbol))
-	}, [dispatch])
+	const [lineColor, setLineColor] = useState('#fffc9a')
+	const [pointColor, setPointColor] = useState('#c4d624')
+	const [yLabelOn, setYLabelOn] = useState(true)
+	const [yLabelColor, setYLabelColor] = useState('#fafafa')
+	const [xLabelOn, setXLabelOn] = useState(false)
+	const [xLabelColor, setXLabelColor] = useState('#fafafa')
+
+	const dispatch = useDispatch()
+	useEffect(async () => {
+		await dispatch(getLineDataBySymbol(symbol))
+	}, [dispatch, params])
 
 	useEffect(() => {
 		const lineData = stockData?.lineData
-		const lineColor = '#0ff0ff99'
-		const pointColor = lineColor
+		console.log(lineData)
 		if (lineData) {
 			setState({
-				labels: new Array(lineData.length).fill(''),
+				labels: lineData.map(point => {
+					const date = new Date(point.x)
+					console.log(date.toLocaleString('default', { month: 'short' }))
+					return `${date.getMonth() + 1}/${date.getDay()}`
+				}),
 				datasets: [
 					{
 						label: 'Price  ( $ )',
@@ -37,12 +47,59 @@ const LineChart = ({ symbol }) => {
 				],
 			})
 		}
-	}, [stockData])
+	}, [stockData, params, lineColor, pointColor, yLabelColor])
 
 	return (
 		<div className="line-chart">
 			<h2>{symbol}</h2>
-			<Line data={state} />
+			<Line
+				data={state}
+				options={{
+					legend: {
+						display: false,
+					},
+					scales: {
+						yAxes: [
+							{
+								ticks: {
+									display: yLabelOn,
+									fontColor: yLabelColor,
+									fontSize: 16,
+								},
+							},
+						],
+						xAxes: [
+							{
+								ticks: {
+									display: xLabelOn,
+									fontColor: xLabelColor,
+									fontSize: 16,
+								},
+							},
+						],
+					},
+				}}
+			/>
+			<div className="line-chart__controls">
+				<div className="line-chart__controls--line">
+					<label>Line Color</label>
+					<input value={lineColor} onChange={e => setLineColor(e.target.value)} type="color" />
+				</div>
+				<div className="line-chart__controls--point">
+					<label>Point Color</label>
+					<input value={pointColor} onChange={e => setPointColor(e.target.value)} type="color" />
+				</div>
+				<div className="line-chart__controls--y-label">
+					<input checked={yLabelOn} type="checkbox" onChange={() => setYLabelOn(!yLabelOn)} />
+					<label>Y-Axis Label Color</label>
+					<input value={yLabelColor} onChange={e => setYLabelColor(e.target.value)} type="color" />
+				</div>
+				<div className="line-chart__controls--x-label">
+					<input checked={xLabelOn} type="checkbox" onChange={() => setXLabelOn(!xLabelOn)} />
+					<label>X-Axis Label Color</label>
+					<input value={xLabelColor} onChange={e => setXLabelColor(e.target.value)} type="color" />
+				</div>
+			</div>
 		</div>
 	)
 }
