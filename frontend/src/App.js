@@ -4,9 +4,10 @@ import { Redirect, Route, Switch, useParams } from 'react-router-dom'
 import SignupFormPage from './components/SignupFormPage'
 import * as sessionActions from './store/session'
 import Navigation from './components/Navigation'
-import LineChart from './components/Charts/LineChart'
+import StockChart from './components/Charts/StockChart'
 import LoginFormPage from './components/LoginFormPage'
 import WatchlistChart from './components/Charts/WatchlistCharts/WatchlistChart'
+import StockDetailPage from './components/StockDetailPage'
 
 function App() {
 	const dispatch = useDispatch()
@@ -46,13 +47,9 @@ function App() {
 
 					<div className="page__content">
 						<Switch>
-							<Route exact path="/">
-								{/* <LineChart symbol="GME" />
-						<LineChart symbol="AAPL" /> */}
-							</Route>
+							<Route exact path="/"></Route>
 							<Route path="/stocks/:symbol">
-								{/* <StockInfoPage /> */}
-								<LineChart />
+								<StockDetailPage />
 							</Route>
 						</Switch>
 					</div>

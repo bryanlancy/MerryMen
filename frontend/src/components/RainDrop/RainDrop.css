@@ -1,0 +1,47 @@
+@keyframes raindrop {
+	0% {
+		top: -10%;
+	}
+	100% {
+		top: 110%;
+	}
+}
+@keyframes glow {
+	0%,
+	100% {
+		text-shadow: 0 0 2px #00000000;
+	}
+	50% {
+		text-shadow: 0 0 15px var(--color-glow-hover);
+	}
+}
+@keyframes spin {
+	0% {
+		transform: rotate(0);
+	}
+	100% {
+		transform: rotate(360deg);
+	}
+}
+@keyframes melt {
+	0% {
+		opacity: 1;
+	}
+	100% {
+		opacity: 0;
+	}
+}
+
+@keyframes boxglow {
+	0%,
+	100% {
+		box-shadow: 0 0 5px 10 var(--color-highlight), 0 0 1px 1px var(--color-glow) inset;
+	}
+	50% {
+		box-shadow: 0 0 15px 0 var(--color-highlight), 0 0 5px 1px var(--color-glow) inset;
+	}
+}
+.rain {
+	position: absolute;
+	color: var(--color-glow);
+}

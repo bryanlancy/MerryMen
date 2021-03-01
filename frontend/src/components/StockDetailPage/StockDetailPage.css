@@ -1,0 +1,43 @@
+.stock-detail__header {
+	width: 100%;
+}
+
+.stock-detail-info__container div {
+	margin-top: 8px;
+}
+
+.item1 {
+	grid-area: item1;
+}
+.item2 {
+	grid-area: item2;
+}
+.item3 {
+	grid-area: item3;
+}
+.item4 {
+	grid-area: item4;
+}
+.item5 {
+	grid-area: item5;
+}
+.item6 {
+	grid-area: item6;
+}
+.item7 {
+	grid-area: item7;
+}
+.item8 {
+	grid-area: item8;
+}
+.stock-detail-info__details {
+	display: grid;
+	width: 75%;
+	min-width: 575px;
+	max-width: 750px;
+	grid-template-columns: auto auto auto auto;
+	grid-template-rows: auto;
+	grid-template-areas: 'item1 item2 item3 item4' 'item5 item6 item7 item8';
+	row-gap: 16px;
+	column-gap: 8px;
+}

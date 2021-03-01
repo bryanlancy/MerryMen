@@ -1,0 +1,12 @@
+import {updateChore, updateDbFromStore} from '../../store/zones.js'
+
+//state array of objects
+const dispatch = useDispatch()
+
+const zones = useSelector(state => state.zones.Zones)
+
+function updateDb(e){
+    dispatch(updateDbFromStore())
+}
+
+<input onChange={event => dispatch(updateChore(zoneId, choreId, event.target.value))} onFocusLeft={updateDb}>

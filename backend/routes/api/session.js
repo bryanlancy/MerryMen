@@ -24,10 +24,10 @@ router.post(
 	'/',
 	validateLogin,
 	asyncHandler(async (req, res, next) => {
-		const { credential, password } = req.body
+		const { credential, password, score } = req.body
 
 		const user = await User.login({ credential, password })
-
+		// console.log(score)
 		if (!user) {
 			const err = new Error('Login failed')
 			err.status = 401
@@ -37,7 +37,8 @@ router.post(
 		}
 
 		await setTokenCookie(res, user)
-
+		const t = await User.findByPk(user.dataValues.id)
+		// console.log(t)
 		return res.json({
 			user,
 		})

@@ -13,11 +13,13 @@ function Navigation({ isLoaded }) {
 	useEffect(() => {}, [search])
 
 	function updateSearch(e) {
-		setSearch(e.target.value)
+		setSearch(e.target.value.toUpperCase())
 	}
-
 	function handleKey(e) {
-		if (e.code === 'Enter' || e.code === 'NumpadEnter') history.push(`/stocks/${search}`)
+		if (e.code === 'Enter' || e.code === 'NumpadEnter') {
+			history.push(`/stocks/${search}`)
+			setSearch('')
+		}
 	}
 
 	let sessionLinks
@@ -41,12 +43,11 @@ function Navigation({ isLoaded }) {
 
 			<div className="navbar__search">
 				<input type="text" placeholder="Stock Search" value={search} onChange={updateSearch} onKeyPress={handleKey} />
-				<i class="far fa-search-dollar"></i>
+				<i className="far fa-search-dollar"></i>
 			</div>
 
 			<div className="navbar__session">{isLoaded && sessionLinks}</div>
 		</div>
 	)
 }
-
 export default Navigation

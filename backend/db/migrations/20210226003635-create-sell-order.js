@@ -1,53 +1,49 @@
 'use strict'
 module.exports = {
 	up: (queryInterface, Sequelize) => {
-		return queryInterface.createTable('Users', {
+		return queryInterface.createTable('SellOrders', {
 			id: {
 				allowNull: false,
 				autoIncrement: true,
 				primaryKey: true,
 				type: Sequelize.INTEGER,
 			},
-			firstName: {
-				type: Sequelize.STRING(30),
+			userId: {
 				allowNull: false,
+				type: Sequelize.INTEGER,
+				references: { model: 'Users' },
 			},
-			lastName: {
-				type: Sequelize.STRING(30),
+			symbol: {
 				allowNull: false,
+				type: Sequelize.STRING,
 			},
-			username: {
-				type: Sequelize.STRING(30),
+			price: {
 				allowNull: false,
-				unique: true,
-			},
-			email: {
-				type: Sequelize.STRING(256),
-				allowNull: false,
-				unique: true,
-			},
-			cash: {
 				type: Sequelize.DECIMAL(20, 2),
-				defaultValue: 10000.0,
-				allowNull: false,
 			},
-			hashedPassword: {
-				type: Sequelize.STRING.BINARY,
+			status: {
 				allowNull: false,
+				type: Sequelize.STRING,
+			},
+			isShared: {
+				allowNull: false,
+				type: Sequelize.BOOLEAN,
+			},
+			quantity: {
+				allowNull: false,
+				type: Sequelize.INTEGER,
 			},
 			createdAt: {
 				allowNull: false,
 				type: Sequelize.DATE,
-				defaultValue: Sequelize.fn('now'),
 			},
 			updatedAt: {
 				allowNull: false,
 				type: Sequelize.DATE,
-				defaultValue: Sequelize.fn('now'),
 			},
 		})
 	},
 	down: (queryInterface, Sequelize) => {
-		return queryInterface.dropTable('Users')
+		return queryInterface.dropTable('SellOrders')
 	},
 }

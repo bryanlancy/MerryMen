@@ -1,0 +1,26 @@
+* {
+	--scoreboard-offset: 50px;
+}
+
+@keyframes slideDown {
+	0% {
+		transform: translateY(calc(-100% - var(--scoreboard-offset)));
+	}
+	100% {
+		transform: translateY(0);
+	}
+}
+.scoreboard-container {
+	position: absolute;
+	top: var(--scoreboard-offset);
+	left: 50px;
+
+	display: flex;
+	flex-direction: column;
+
+	padding: 8px;
+
+	background: rgba(56, 56, 56, 0.645);
+	animation: slideDown ease-in-out 0.5s forwards;
+	color: white;
+}

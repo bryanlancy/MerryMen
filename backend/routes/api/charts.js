@@ -2,12 +2,15 @@ const axios = require('axios')
 const { asyncHandler } = require('../../utils/utils')
 const router = require('express').Router()
 
-//localhost:5000/api/charts/list
+//localhost:5000/api/charts
+
+//GET localhost:5000/api/charts/:symbol
 router.get(
-	'/list',
+	'/:symbols',
 	asyncHandler(async (req, res) => {
-		const symbols = req.query.symbols
-		const url = `https://data.alpaca.markets/v1/bars/day?symbols=${symbols}&limit=10`
+		const symbols = req.params.symbols
+		const limit = symbols.split(',').length > 1 ? '100' : '100'
+		const url = `https://data.alpaca.markets/v1/bars/day?symbols=${symbols}&limit=${limit}`
 		const config = {
 			headers: {
 				'APCA-API-KEY-ID': process.env.APCA_API_KEY_ID,
@@ -21,38 +24,15 @@ router.get(
 				for (const stock in res.data) {
 					stocks.push({
 						[stock]: res.data[stock].map(point => {
-							return { x: new Date(point.t * 1000), y: point.c, o: point.o }
+							const date = new Date(point.t * 1000)
+							const formattedDate = `${date.getMonth() + 1}/${date.getDate() + 1}/${date.getFullYear().toString().slice(2)}`
+							return { Time: formattedDate, Close: point.c, Open: point.o, High: point.h, Low: point.l }
 						}),
 					})
 				}
 				return stocks
 			})
 			.catch(error => error)
-		res.json(data)
-	})
-)
-
-//localhost:5000/api/charts/:symbol
-router.get(
-	'/:symbol',
-	asyncHandler(async (req, res) => {
-		console.log('SHOULDNT HIT ME')
-		const symbol = req.params.symbol
-		const url = `https://data.alpaca.markets/v1/bars/day?symbols=${symbol}&limit=100`
-		const config = {
-			headers: {
-				'APCA-API-KEY-ID': process.env.APCA_API_KEY_ID,
-				'APCA-API-SECRET-KEY': process.env.APCA_API_SECRET_KEY,
-			},
-		}
-		const data = await axios
-			.get(url, config)
-			.then(res =>
-				res.data[symbol].map(point => {
-					return { x: new Date(point.t * 1000), y: point.c }
-				})
-			)
-			.catch(error => console.log('error', error))
 		res.json(data)
 	})
 )

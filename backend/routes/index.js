@@ -2,6 +2,9 @@ const express = require('express')
 const router = express.Router()
 const apiRouter = require('./api')
 
+//localhost:5000
+
+//if route has /api
 router.use('/api', apiRouter)
 
 // Static routes

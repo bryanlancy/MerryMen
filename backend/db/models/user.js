@@ -6,6 +6,20 @@ module.exports = (sequelize, DataTypes) => {
 	const User = sequelize.define(
 		'User',
 		{
+			firstName: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				validate: {
+					len: [1, 30],
+				},
+			},
+			lastName: {
+				type: DataTypes.STRING,
+				allowNull: false,
+				validate: {
+					len: [1, 30],
+				},
+			},
 			username: {
 				type: DataTypes.STRING,
 				allowNull: false,
@@ -18,16 +32,16 @@ module.exports = (sequelize, DataTypes) => {
 					},
 				},
 			},
+			cash: {
+				type: DataTypes.DECIMAL,
+				defaultValue: 10000.0,
+				allowNull: false,
+			},
 			email: {
 				type: DataTypes.STRING,
 				allowNull: false,
 				validate: {
 					len: [3, 256],
-					// isEmail(value) {
-					// 	if (!Validator.isEmail(value)) {
-					// 		throw new Error('Must be a valid email address.')
-					// 	}
-					// },
 				},
 			},
 			hashedPassword: {
@@ -41,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
 		{
 			defaultScope: {
 				attributes: {
-					exclude: ['hashedPassword', 'email', 'createdAt', 'updatedAt'],
+					exclude: ['hashedPassword', 'email', 'cash', 'createdAt', 'updatedAt'],
 				},
 			},
 			scopes: {
@@ -55,12 +69,15 @@ module.exports = (sequelize, DataTypes) => {
 		}
 	)
 	User.associate = function (models) {
-		// associations can be defined here
+		User.hasMany(models.Watchlist, { foreignKey: 'userId' })
+		User.hasMany(models.BuyOrder, { foreignKey: 'userId' })
+		User.hasMany(models.SellOrder, { foreignKey: 'userId' })
+		User.hasMany(models.Position, { foreignKey: 'userId' })
 	}
 	User.prototype.toSafeObject = function () {
 		// remember, this cannot be an arrow function
-		const { id, username, email } = this // context will be the User instance
-		return { id, username, email }
+		const { id, firstName, lastName, username, email, cash } = this // context will be the User instance
+		return { id, firstName, lastName, username, email, cash }
 	}
 	User.prototype.validatePassword = function (password) {
 		return bcrypt.compareSync(password, this.hashedPassword.toString())
@@ -82,9 +99,11 @@ module.exports = (sequelize, DataTypes) => {
 			return await User.scope('currentUser').findByPk(user.id)
 		}
 	}
-	User.signup = async function ({ username, email, password }) {
+	User.signup = async function ({ username, email, password, firstName, lastName }) {
 		const hashedPassword = bcrypt.hashSync(password)
 		const user = await User.create({
+			firstName,
+			lastName,
 			username,
 			email,
 			hashedPassword,
