@@ -10,10 +10,6 @@
 	height: var(--navbar-height);
 	box-shadow: 0 1px 5px 2px #00000055;
 }
-.navbar__session * {
-	border: none;
-	background: #000;
-}
 .navbar * {
 	color: var(--color-text);
 	text-decoration: none;
@@ -43,4 +39,36 @@
 }
 .navbar__search i {
 	margin-left: 8px;
+}
+.navbar__session * {
+	border: none;
+}
+.navbar__session button {
+	padding: 4px;
+
+	border: 1px solid var(--color-text);
+	border-radius: 8px;
+	background-color: transparent;
+}
+.navbar__session button:hover {
+	cursor: pointer;
+}
+.profile-dropdown {
+	position: absolute;
+	top: 100%;
+	right: 0;
+
+	padding: 8px;
+
+	list-style-type: none;
+	background-color: #00000055;
+	border-radius: 0 0 0 8px;
+}
+.profile-dropdown button {
+	padding: 4px;
+
+	margin-top: 4px;
+	border: 1px solid var(--color-text);
+	border-radius: 8px;
+	background-color: transparent;
 }
