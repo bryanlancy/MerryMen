@@ -174,9 +174,7 @@
 	animation: 0.2s ease-out 0s 1 lightsOn forwards;
 }
 .watchlist__select--title option {
-	color: red;
-	/* background: none;
-	appearance: none; */
+	color: #000;
 }
 
 .watchlist__header {
