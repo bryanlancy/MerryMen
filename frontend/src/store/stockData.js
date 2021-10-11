@@ -29,13 +29,15 @@ export const getLineDataByList = list => async (dispatch, getState) => {
 	const response = await fetch(`/api/charts/${list}`)
 	if (response.ok) {
 		const stocks = await response.json()
+		if (Array.isArray(stocks)) {
+			const newList = stocks.map(stock => {
+				const symbol = Object.keys(stock)[0]
+				const { [symbol]: lineData } = stock
+				dispatch(addLines(symbol, lineData))
+				return { symbol, lineData }
+			})
 
-		const newList = stocks.map(stock => {
-			const symbol = Object.keys(stock)[0]
-			const { [symbol]: lineData } = stock
-			dispatch(addLines(symbol, lineData))
-			return { symbol, lineData }
-		})
+		}
 	}
 }
 

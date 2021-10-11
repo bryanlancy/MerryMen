@@ -149,7 +149,6 @@ export default function RainDrop({ score, setScore }) {
 
 	function catchSnow() {
 		if (!caught) {
-			console.log('You caught me!')
 			setCaught(!caught)
 			setScore(score + options.score)
 		}

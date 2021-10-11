@@ -3,18 +3,6 @@ import './StockChart.css'
 // import { useState, useEffect } from 'react'
 
 const StockChart = ({ lineData }) => {
-	// const [lineData, setLineData] = useState([])
-
-	// useEffect(() => {
-	// 	const delay = 500
-	// 	stockData?.lineData.forEach((point, i) => {
-	// 		setLineData([...lineData, point])
-	// 		// setTimeout(() => {
-	// 		// }, delay * i)
-	// 	})
-
-	// 	console.log('LINE DATA', lineData)
-	// }, [stockData])
 
 	return (
 		<div className="line-chart">

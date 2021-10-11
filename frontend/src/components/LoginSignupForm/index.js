@@ -21,6 +21,6 @@ export default function LoginSignupForm({ score }) {
             break;
     }
 
-    return form
+    return <div className="form">{form}</div>
 
 }

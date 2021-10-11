@@ -30,7 +30,6 @@ const WatchlistChart = ({ list } = '') => {
 	}
 
 	function changeWatchlist(list) {
-		// console.log(list)
 		setListState(list)
 	}
 	function clickOnChart(symbol) {

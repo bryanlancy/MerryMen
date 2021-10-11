@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import { NavLink, useHistory } from 'react-router-dom'
 import { useSelector } from 'react-redux'
 import ProfileButton from './ProfileButton'
-import LoginFormModal from '../LoginFormModal'
+
 import './Navigation.css'
 
 function Navigation({ isLoaded }) {
@@ -10,7 +10,7 @@ function Navigation({ isLoaded }) {
 	const sessionUser = useSelector(state => state.session.user)
 	const [search, setSearch] = useState('')
 
-	useEffect(() => {}, [search])
+	useEffect(() => { }, [search])
 
 	function updateSearch(e) {
 		setSearch(e.target.value.toUpperCase())
@@ -20,18 +20,6 @@ function Navigation({ isLoaded }) {
 			history.push(`/stocks/${search}`)
 			setSearch('')
 		}
-	}
-
-	let sessionLinks
-	if (sessionUser) {
-		sessionLinks = <ProfileButton user={sessionUser} />
-	} else {
-		sessionLinks = (
-			<>
-				<LoginFormModal />
-				<NavLink to="/signup">Sign Up</NavLink>
-			</>
-		)
 	}
 
 	return (
@@ -46,7 +34,7 @@ function Navigation({ isLoaded }) {
 				<i className="far fa-search-dollar"></i>
 			</div>
 
-			<div className="navbar__session">{isLoaded && sessionLinks}</div>
+			<div className="navbar__session">{isLoaded && <ProfileButton user={sessionUser} />}</div>
 		</div>
 	)
 }

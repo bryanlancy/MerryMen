@@ -1,3 +1,45 @@
+.form {
+	display: flex;
+	flex-direction: column;
+
+	width: 100%;
+	max-width: 450px;
+	padding: 8px;
+
+	color: #fff;
+}
+.form form {
+	display: flex;
+	flex-direction: column;
+}
+.form form :is(div, button) {
+	margin-top: 16px;
+}
+.form form div {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+.form :is(form button, button) {
+	padding: 4px;
+	border: none;
+	border-radius: 16px;
+}
+.form div {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-top: 8px;
+}
+@media screen and (min-width: 500px) {
+	.form form div {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+
 .form__picture {
 	position: absolute;
 

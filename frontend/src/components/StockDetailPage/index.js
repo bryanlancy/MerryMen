@@ -15,7 +15,6 @@ export default function StockDetailPage() {
 	useEffect(async () => {
 		await dispatch(getLineDataByList([symbol]))
 		await dispatch(getStockInfo(symbol))
-		// if (stockData) console.log(Date.now() - stockData.time)
 	}, [dispatch, symbol])
 
 	return (
