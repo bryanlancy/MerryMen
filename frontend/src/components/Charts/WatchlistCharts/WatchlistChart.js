@@ -90,9 +90,9 @@ const WatchlistChart = ({ list } = '') => {
 					</div>
 				</div>
 				<div className="watchlist__chart-container">
-					{watchlists[listState].stocks.map(stock => (
-						<StockChart lineData={stocks[stock].lineData} />
-					))}
+					{watchlists[listState].stocks.map(stock => {
+						if (stocks[stock]) return <StockChart key={`watchlist-chart-${stock}`} lineData={stocks[stock].lineData} />
+					})}
 				</div>
 			</div>
 		)
