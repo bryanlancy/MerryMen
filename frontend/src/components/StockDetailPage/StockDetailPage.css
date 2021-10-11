@@ -1,6 +1,9 @@
 .stock-detail__header {
 	width: 100%;
 }
+:is(.stock-detail-info__container, .stock-detail__header) {
+	color: var(--color-text);
+}
 
 .stock-detail-info__container div {
 	margin-top: 8px;

@@ -90,8 +90,43 @@ const WatchlistChart = ({ list } = '') => {
 					</div>
 				</div>
 				<div className="watchlist__chart-container">
-					{watchlists[listState].stocks.map(stock => {
+					{/* {watchlists[listState].stocks.map(stock => {
 						if (stocks[stock]) return <StockChart key={`watchlist-chart-${stock}`} lineData={stocks[stock].lineData} />
+					})} */}
+					{watchlists[listState].stocks.map(symbol => {
+						const { [symbol]: stock } = stocks;
+						if (stock) {
+							const { lineData: data } = stock
+							const upSinceLast = data[data.length - 1].Close - data[data.length - 2].Close > 0
+							const upCurrent = data[data.length - 1].Close - data[data.length - 1].Open > 0
+							const diffCurrent = data[data.length - 1].Close - data[data.length - 1].Open
+							return (
+								<div key={`watchlist-${symbol}`} className="watchlist__chart" onClick={() => clickOnChart(symbol)}>
+									<div className="watchlist__header">
+										<div className="watchlist__price">
+											<h3 className={`watchlist__price--current ${upSinceLast ? 'green' : 'red'}`}>
+												${data[data.length - 1].Close}
+											</h3>
+											<div className="watchlist__change">
+												<p className={`watchlist__change--dollar ${upCurrent ? 'green' : 'red'}`}>
+													{upCurrent ? '' : '-'}
+													${Math.abs(Math.round((diffCurrent) * 100) / 100)}
+												</p>
+												<p className={`watchlist__change--percents ${upCurrent ? 'green' : 'red'}`}>
+													{Math.round(((diffCurrent) / data[data.length - 1].Open) * 10000) / 10000}%
+												</p>
+											</div>
+										</div>
+										<h3 className="watchlist__symbol">{symbol}</h3>
+										<div className="watchlist__buttons">
+											<button className="watchlist__buttons--buy">Buy</button>
+											<button className="watchlist__buttons--sell">Sell</button>
+										</div>
+									</div>
+									<StockChart lineData={data} />
+								</div>
+							)
+						}
 					})}
 				</div>
 			</div>

@@ -131,6 +131,9 @@
 	border-radius: 5px;
 	box-shadow: 0 0 10px 1px #c4d62444;
 }
+.watchlist__chart-container > div {
+	height: fit-content;
+}
 .watchlist-mini {
 	display: flex;
 	flex-direction: column;
