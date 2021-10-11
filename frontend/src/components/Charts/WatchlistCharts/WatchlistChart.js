@@ -11,8 +11,32 @@ import './WatchlistChart.css'
 const WatchlistChart = ({ list } = '') => {
 	const history = useHistory()
 	const { watchlist, stocks } = useSelector(state => state.stockData)
+
 	const dispatch = useDispatch()
-	const [listState, setListState] = useState(['GME', 'AAPL', 'EGAN', 'EEX', 'DIET'])
+
+	//move to redux
+	const watchlists = [
+		{
+			name: "Watchlist 1",
+			stocks: ['GME', 'AAPL', 'EGAN', 'EEX', 'DIET'],
+		},
+		{
+			name: "Watchlist 2",
+			stocks: ['SONM', 'FAUS', 'RUN', 'PSMG', 'RILY'],
+		},
+		{
+			name: "Watchlist 3",
+			stocks: ['SSPK', 'AER', 'CORR', 'NWGI', 'CHT'],
+		},
+		{
+			name: "Watchlist 4",
+			stocks: ['SQM', 'XHS', 'TALO', 'PLL', 'SYLD']
+		}
+	]
+	//move to redux
+
+	const [listState, setListState] = useState(0)
+
 	const [hidden, setHidden] = useState(true)
 	const [colors, setColors] = useState({
 		pointColor: '#a0a000',
@@ -22,7 +46,7 @@ const WatchlistChart = ({ list } = '') => {
 	})
 
 	useEffect(() => {
-		dispatch(getLineDataByList(listState))
+		dispatch(getLineDataByList(watchlists[listState].stocks))
 	}, [dispatch, listState])
 
 	function toggleHideWatchList() {
@@ -52,10 +76,9 @@ const WatchlistChart = ({ list } = '') => {
 			<div className={`watchlist ${hidden ? 'hidden' : ''}`}>
 				<div className="watchlist__select">
 					<select className="watchlist__select--title" value={listState} onChange={e => changeWatchlist(e.target.value)}>
-						<option value={['GME', 'AAPL', 'EGAN', 'EEX', 'DIET']}>Watchlist 1 </option>
-						<option value={['SONM', 'FAUS', 'RUN', 'PSMG', 'RILY']}>Watchlist 2</option>
-						<option value={['SSPK', 'AER', 'CORR', 'NWGI', 'CHT']}>Watchlist 3</option>
-						<option value={['SQM', 'XHS', 'TALO', 'PLL', 'SYLD']}>Watchlist 4</option>
+						{watchlists.map((watchlist, i) => (
+							<option key={watchlist.name} value={i}>{watchlist.name}</option>
+						))}
 					</select>
 					<div className="watchlist__select--buttons">
 						<button className="watchlist__edit">
@@ -67,59 +90,9 @@ const WatchlistChart = ({ list } = '') => {
 					</div>
 				</div>
 				<div className="watchlist__chart-container">
-					{/* {watchlist.map(stock => (
-						<div key={`watchlist-${stock.symbol}`} className="watchlist__chart" onClick={() => clickOnChart(stock.symbol)}>
-							<div className="watchlist__header">
-								<div className="watchlist__price">
-									<h3
-										className={`watchlist__price--current ${
-											stocks[stock.symbol].lineData[stocks[stock.symbol].lineData.length - 1].y - stocks[stock.symbol].lineData[stocks[stock.symbol].lineData.length - 2].y > 0 ? 'green' : 'red'
-										}`}
-									>
-										${stocks[stock.symbol].lineData[stocks[stock.symbol].lineData.length - 1].y}
-									</h3>
-									<div className="watchlist__change">
-										<p
-											className={`watchlist__change--dollar ${
-												stocks[stock.symbol].lineData[stocks[stock.symbol].lineData.length - 1].y - stocks[stock.symbol].lineData[stocks[stock.symbol].lineData.length - 1].o > 0 ? 'green' : 'red'
-											}`}
-										>
-											{stocks[stock.symbol].lineData[stocks[stock.symbol].lineData.length - 1].y - stocks[stock.symbol].lineData[stocks[stock.symbol].lineData.length - 1].o < 0 ? '-' : ''}$
-											{Math.abs(Math.round((stocks[stock.symbol].lineData[stocks[stock.symbol].lineData.length - 1].y - stocks[stock.symbol].lineData[stocks[stock.symbol].lineData.length - 1].o) * 100) / 100)}
-										</p>
-										<p
-											className={`watchlist__change--percents ${
-												stocks[stock.symbol].lineData[stocks[stock.symbol].lineData.length - 1].y - stocks[stock.symbol].lineData[stocks[stock.symbol].lineData.length - 1].o > 0 ? 'green' : 'red'
-											}`}
-										>
-											{Math.round(
-												((stocks[stock.symbol].lineData[stocks[stock.symbol].lineData.length - 1].y - stocks[stock.symbol].lineData[stocks[stock.symbol].lineData.length - 1].o) /
-													stocks[stock.symbol].lineData[stocks[stock.symbol].lineData.length - 1].o) *
-													10000
-											) / 10000}
-											%
-										</p>
-									</div>
-								</div>
-								<h3 className="watchlist__symbol">{stock.symbol}</h3>
-								<div className="watchlist__buttons">
-									<button className="watchlist__buttons--buy">Buy</button>
-									<button className="watchlist__buttons--sell">Sell</button>
-								</div>
-							</div>
-							<ResponsiveContainer width="100%">
-								<LineChart data={stocks[stock.symbol].lineData}>
-									<Line type="linear" stroke={'green'} dataKey="High" dot={false} isAnimationActive={false} />
-									<Line type="linear" stroke={'red'} dataKey="Low" dot={false} isAnimationActive={false} />
-									<Line type="linear" dataKey="Open" dot={false} isAnimationActive={false} />
-									<Line type="linear" dataKey="Close" dot={false} isAnimationActive={false} />
-									<YAxis />
-									<XAxis dataKey="Time" />
-									<Tooltip />
-								</LineChart>
-							</ResponsiveContainer>
-						</div>
-					))} */}
+					{watchlists[listState].stocks.map(stock => (
+						<StockChart lineData={stocks[stock].lineData} />
+					))}
 				</div>
 			</div>
 		)
