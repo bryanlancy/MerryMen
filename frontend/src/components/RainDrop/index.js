@@ -5,9 +5,9 @@ function makeSnow() {
 	const options = {}
 	const rarity = (function () {
 		const chance = Math.random() * 100
-		if (chance > 95) {
+		if (chance > 98) {
 			return 'Rare'
-		} else if (chance > 75) {
+		} else if (chance > 80) {
 			return 'Uncommon'
 		} else return 'Common'
 	})()
@@ -21,7 +21,7 @@ function makeSnow() {
 	})()
 
 	function getPos() {
-		return (Math.random() * (98 - 2) + 2).toFixed(1)
+		return (Math.random() * (65 - 2) + 2).toFixed(1)
 	}
 
 	function getColor() {

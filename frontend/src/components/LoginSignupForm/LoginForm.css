@@ -1,0 +1,20 @@
+.form__picture {
+	position: absolute;
+
+	height: 100%;
+	width: 100%;
+
+	background: rgb(10, 10, 10);
+}
+
+.form__container {
+	display: flex;
+	align-items: center;
+	z-index: 1;
+
+	height: 100%;
+	width: 50%;
+	margin-left: auto;
+
+	background: rgba(56, 56, 56, 0.645);
+}
