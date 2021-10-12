@@ -186,7 +186,7 @@
 	align-items: center;
 	justify-content: space-between;
 
-	animation: 2s ease-out 0s 1 fadeIn forwards;
+	/* animation: 2s ease-out 0s 1 fadeIn forwards; */
 }
 .watchlist__price {
 	display: flex;
