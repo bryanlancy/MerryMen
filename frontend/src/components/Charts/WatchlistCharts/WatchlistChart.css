@@ -211,6 +211,10 @@
 	color: var(--color-price-green-hover);
 	text-shadow: 0 0 10px var(--color-price-green-glow-hover);
 }
+.watchlist__chart .chart {
+	display: flex;
+	width: 100%;
+}
 .red {
 	color: var(--color-price-red);
 	text-shadow: 0 0 10px var(--color-price-red-glow);

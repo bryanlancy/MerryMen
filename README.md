@@ -23,7 +23,7 @@ Search for stocks by ticker symbol and get live price data, powered by [**Alpaca
 ### Create watchlists
 Save stocks that you want to monitor to watchlists, making them easily accessible for future analysis.
 
-<img src="images/">
+<img src="images/merrymen-watchlist.png">
 
 ### Large amounts of business data
 Using [**Polygon's API**](https://polygon.io/), thousands of the most common businesses' information have been collected to provide further insight on potential trading decisions.

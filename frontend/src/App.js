@@ -13,8 +13,27 @@ function App() {
 	const [isLoaded, setIsLoaded] = useState(false)
 	const sessionUser = useSelector(state => state.session.user)
 
-	//!REPLACE WITH DB WATCHLIST, FIRST IN LIST
-	const [watchlist, setWatchlist] = useState(['GME', 'AAPL', 'EGAN', 'EEX', 'DIET'])
+	//move to redux
+	const watchlists = [
+		{
+			name: "Watchlist 1",
+			stocks: ['GME', 'AAPL', 'EGAN', 'EEX', 'DIET'],
+		},
+		{
+			name: "Watchlist 2",
+			stocks: ['SONM', 'FAUS', 'RUN', 'PSMG', 'RILY'],
+		},
+		{
+			name: "Watchlist 3",
+			stocks: ['SSPK', 'AER', 'CORR', 'NWGI', 'CHT'],
+		},
+		{
+			name: "Watchlist 4",
+			stocks: ['SQM', 'XHS', 'TALO', 'PLL', 'SYLD']
+		}
+	]
+	//move to redux
+	const [watchlist, setWatchlist] = useState(watchlists)
 
 	useEffect(() => {
 		dispatch(sessionActions.restoreUser()).then(() => setIsLoaded(true))
@@ -39,7 +58,7 @@ function App() {
 			<>
 				<Navigation isLoaded={isLoaded} />
 				<div className="page__layout">
-					<WatchlistChart list={watchlist} />
+					<WatchlistChart watchlists={watchlists} />
 
 					<div className="page__content">
 						<Switch>

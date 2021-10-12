@@ -1,49 +1,19 @@
-import { useState, useEffect, createRef } from 'react'
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts'
+import { useState, useEffect } from 'react'
 
 import { useDispatch, useSelector } from 'react-redux'
-import { useParams, useHistory } from 'react-router-dom'
+import { useHistory } from 'react-router-dom'
 import { getLineDataByList } from '../../../store/stockData'
 import StockChart from '../StockChart'
 
 import './WatchlistChart.css'
 
-const WatchlistChart = ({ list } = '') => {
+const WatchlistChart = ({ watchlists }) => {
+
 	const history = useHistory()
-	const { watchlist, stocks } = useSelector(state => state.stockData)
-
 	const dispatch = useDispatch()
-
-	//move to redux
-	const watchlists = [
-		{
-			name: "Watchlist 1",
-			stocks: ['GME', 'AAPL', 'EGAN', 'EEX', 'DIET'],
-		},
-		{
-			name: "Watchlist 2",
-			stocks: ['SONM', 'FAUS', 'RUN', 'PSMG', 'RILY'],
-		},
-		{
-			name: "Watchlist 3",
-			stocks: ['SSPK', 'AER', 'CORR', 'NWGI', 'CHT'],
-		},
-		{
-			name: "Watchlist 4",
-			stocks: ['SQM', 'XHS', 'TALO', 'PLL', 'SYLD']
-		}
-	]
-	//move to redux
-
-	const [listState, setListState] = useState(0)
-
+	const { watchlist, stocks } = useSelector(state => state.stockData)
 	const [hidden, setHidden] = useState(true)
-	const [colors, setColors] = useState({
-		pointColor: '#a0a000',
-		lineColor: '#fffc9a99',
-		labelColor: '#fffc9a',
-		hoverBorderColor: '#f9f7c8',
-	})
+	const [listState, setListState] = useState(0)
 
 	useEffect(() => {
 		dispatch(getLineDataByList(watchlists[listState].stocks))
@@ -97,6 +67,7 @@ const WatchlistChart = ({ list } = '') => {
 							const upSinceLast = data[data.length - 1].Close - data[data.length - 2].Close > 0
 							const upCurrent = data[data.length - 1].Close - data[data.length - 1].Open > 0
 							const diffCurrent = data[data.length - 1].Close - data[data.length - 1].Open
+
 							return (
 								<div key={`watchlist-${symbol}`} className="watchlist__chart" onClick={() => clickOnChart(symbol)}>
 									<div className="watchlist__header">
@@ -121,7 +92,7 @@ const WatchlistChart = ({ list } = '') => {
 										</div>
 									</div>
 									<div className="chart">
-										<StockChart lineData={data} />
+										<StockChart lineData={data} height={100} />
 									</div>
 								</div>
 							)
