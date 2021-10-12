@@ -16,9 +16,9 @@ Check out the live demo <a href="https://merrymenstocks.herokuapp.com/">here</a>
 
 ## Features
 ### Search for stock prices
-Search for stocks by ticker symbol and get live price data, powered by Alpaca API. Interactive charts simplify viewing historic price data.
+Search for stocks by ticker symbol and get live price data, powered by [**Alpaca's API**](https://alpaca.markets/). Interactive charts simplify viewing historic price data.
 
-<img src="images/">
+<img src="images/merrymen-search.png">
 
 ### Create watchlists
 Save stocks that you want to monitor to watchlists, making them easily accessible for future analysis.
@@ -26,10 +26,10 @@ Save stocks that you want to monitor to watchlists, making them easily accessibl
 <img src="images/">
 
 ### Large amounts of business data
-Using Polygon's Stock API, thousands of the most common businesses' information have been collected to provide further insight on potential trading decisions.
+Using [**Polygon's API**](https://polygon.io/), thousands of the most common businesses' information have been collected to provide further insight on potential trading decisions.
 
 
-<img src="images/">
+<img src="images/merrymen-business.png">
 
 ## Technologies
 <p>Frontend</p>

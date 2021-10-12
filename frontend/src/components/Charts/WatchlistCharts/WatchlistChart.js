@@ -90,9 +90,6 @@ const WatchlistChart = ({ list } = '') => {
 					</div>
 				</div>
 				<div className="watchlist__chart-container">
-					{/* {watchlists[listState].stocks.map(stock => {
-						if (stocks[stock]) return <StockChart key={`watchlist-chart-${stock}`} lineData={stocks[stock].lineData} />
-					})} */}
 					{watchlists[listState].stocks.map(symbol => {
 						const { [symbol]: stock } = stocks;
 						if (stock) {
@@ -123,7 +120,9 @@ const WatchlistChart = ({ list } = '') => {
 											<button className="watchlist__buttons--sell">Sell</button>
 										</div>
 									</div>
-									<StockChart lineData={data} />
+									<div className="chart">
+										<StockChart lineData={data} />
+									</div>
 								</div>
 							)
 						}

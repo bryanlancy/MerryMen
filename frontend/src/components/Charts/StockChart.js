@@ -2,7 +2,7 @@ import { LineChart, Line, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'rec
 import './StockChart.css'
 // import { useState, useEffect } from 'react'
 
-const StockChart = ({ lineData }) => {
+const StockChart = ({ lineData, height }) => {
 	return (
 		<div className="line-chart">
 			<ResponsiveContainer width="100%">
