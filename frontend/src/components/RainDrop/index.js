@@ -27,11 +27,11 @@ function makeSnow() {
 	function getColor() {
 		switch (rarity) {
 			case 'Rare':
-				return 'blue'
-			case 'Uncommon':
-				return 'red'
-			default:
 				return '#c4d624'
+			case 'Uncommon':
+				return '#1E8E08'
+			default:
+				return '#687876'
 		}
 	}
 	function getScore() {
@@ -154,6 +154,11 @@ export default function RainDrop({ score, setScore }) {
 		}
 	}
 
+	let style = `
+	raindrop ${options.speed}s linear 0s forwards,
+	spin 3s linear 0s infinite
+	${options.score == 25 ? ',glow 1.5s ease-in-out 0s infinite' : ''}`
+
 	return (
 		<i
 			className={`rain fa ${options.icon}`}
@@ -165,8 +170,8 @@ export default function RainDrop({ score, setScore }) {
 				color: `${options.color}`,
 				zIndex: options.z,
 				animation: !caught
-					? `raindrop ${options.speed}s linear 0s forwards, glow 1.5s ease-in-out 0s infinite, spin 3s linear 0s infinite`
-					: `raindrop ${options.speed}s linear 0s forwards, glow 1.5s ease-in-out 0s infinite, spin 3s linear 0s infinite, melt .5s linear 0s forwards`,
+					? style
+					: style += `, melt .5s linear 0s forwards`,
 			}}
 		></i>
 	)
